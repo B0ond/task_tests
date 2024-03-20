@@ -20,11 +20,11 @@ INITIAL_STAMP = {
 
 
 def generate_stamp(previous_value):
-    score_changed = random.random() > 1 - PROBABILITY_SCORE_CHANGED
+    score_changed = random.random() > 1 - PROBABILITY_SCORE_CHANGED  # -> True or False
     home_score_change = 1 if score_changed and random.random() > 1 - \
-                             PROBABILITY_HOME_SCORE else 0
-    away_score_change = 1 if score_changed and not home_score_change else 0
-    offset_change = math.floor(random.random() * OFFSET_MAX_STEP) + 1
+                             PROBABILITY_HOME_SCORE else 0  # -> 1 or 0
+    away_score_change = 1 if score_changed and not home_score_change else 0  # -> 1 or 0
+    offset_change = math.floor(random.random() * OFFSET_MAX_STEP) + 1  # 1-3
 
     return {
         "offset": previous_value["offset"] + offset_change,
