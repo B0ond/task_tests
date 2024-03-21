@@ -4,7 +4,7 @@ import math
 
 TIMESTAMPS_COUNT = 50000
 
-PROBABILITY_SCORE_CHANGED = 0.0001
+PROBABILITY_SCORE_CHANGED = 0.0001  # вероятность что изменится
 
 PROBABILITY_HOME_SCORE = 0.45
 
@@ -19,10 +19,11 @@ INITIAL_STAMP = {
 }
 
 
-def generate_stamp(previous_value):
-    score_changed = random.random() > 1 - PROBABILITY_SCORE_CHANGED
+def generate_stamp(previous_value):  # previous_value вставляется в return
+    score_changed = random.random() > 1 - PROBABILITY_SCORE_CHANGED  # True or False
     home_score_change = 1 if score_changed and random.random() > 1 - \
                              PROBABILITY_HOME_SCORE else 0
+    # если score_changed True и с вероятностью 45% home_score_change будет равнятся 1
     away_score_change = 1 if score_changed and not home_score_change else 0
     offset_change = math.floor(random.random() * OFFSET_MAX_STEP) + 1
 
@@ -56,3 +57,5 @@ def get_score(game_stamps, offset):
         Please pay attention to that for some offsets the game_stamps list may not contain scores.
     '''
     # return home, away
+
+
