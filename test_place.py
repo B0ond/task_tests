@@ -1,29 +1,21 @@
-INITIAL_STAMP = {
-    "offset": 0,
-    "score": {
-        "home": 0,
-        "away": 0
-    }
-}
+INITIAL_STAMP = [{"offset": 0}, {"offset": 1}, {"offset": 2},
+                 {"offset": 3}, {"offset": 4}, {"offset": 5},
+                 {"offset": 6}, {"offset": 7}, {"offset": 8},
+                 {"offset": 9}, {"offset": 10}, {"offset": 11}]
 
 
-def calculate_score(previous_value):
-    offset_change = 2
-    home_score_change = 3
-    away_score_change = 4
-    return {
-        "offset": previous_value["offset"] + offset_change,
-        "score": {
-            "home": previous_value["score"]["home"] + home_score_change,
-            "away": previous_value["score"]["away"] + away_score_change
-        }
-    }
+def get_score(game_stamps, offset):
+    left, right = 0, len(game_stamps) - 1
+
+    # Бинарный поиск для нахождения индекса первой метки с временем, большим или равным указанному времени
+    while left <= right:
+        mid = (left + right) // 2
+        if game_stamps[mid]["offset"] >= offset:
+            right = mid - 1
+        else:
+            left = mid + 1
+    return f'we find 7'
 
 
-def generate_game():
-    current_stamp = INITIAL_STAMP
-    out = calculate_score(current_stamp)
-    return out
 
-
-print(generate_game())
+print(get_score(INITIAL_STAMP, 7))

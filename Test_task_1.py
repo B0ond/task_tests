@@ -62,14 +62,13 @@ def get_score(game_stamps, offset):
 
     # Если нет метки с указанным временем, вернуть счет ближайшей предыдущей метки
     if left == len(game_stamps) or game_stamps[left]["offset"] != offset:
-        return game_stamps[left - 1]["score"]["home"], game_stamps[left - 1]["score"]["away"], 'else'
+        return 'no data'
     else:
         return game_stamps[left]["score"]["home"], game_stamps[left]["score"]["away"], len(game_stamps) - 1
 
 
-pprint(get_score(game_stamps, 50000))
-# pprint(game_stamps)
-
+pprint(game_stamps)
+pprint(get_score(game_stamps, 99715))
 
 
 
