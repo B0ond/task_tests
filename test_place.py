@@ -14,8 +14,30 @@ def get_score(game_stamps, offset):
             right = mid - 1
         else:
             left = mid + 1
-    return f'we find 7'
+    if left == len(game_stamps) or game_stamps[left]["offset"] != offset:
+        return "no data"
+    else:
+        return game_stamps[left]["offset"]
+
 
 
 
 print(get_score(INITIAL_STAMP, 7))
+
+
+# def get_score(game_stamps, offset):
+#     left, right = 0, len(game_stamps) - 1
+#
+#     # Бинарный поиск для нахождения индекса первой метки с временем, большим или равным указанному времени
+#     while left <= right:
+#         mid = (left + right) // 2
+#         if game_stamps[mid]["offset"] >= offset:
+#             right = mid - 1
+#         else:
+#             left = mid + 1
+#
+#     # Если нет метки с указанным временем, вернуть счет ближайшей предыдущей метки
+#     if left == len(game_stamps) or game_stamps[left]["offset"] != offset:
+#         return 'no data'
+#     else:
+#         return game_stamps[left]["score"]["away"], game_stamps[left]["score"]["home"]

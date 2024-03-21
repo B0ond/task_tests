@@ -64,7 +64,7 @@ def get_score(game_stamps, offset):
     if left == len(game_stamps) or game_stamps[left]["offset"] != offset:
         return 'no data'
     else:
-        return game_stamps[left]["score"]["home"], game_stamps[left]["score"]["away"], len(game_stamps) - 1
+        return game_stamps[left]["score"]["away"], game_stamps[left]["score"]["home"], left
 
 
 pprint(game_stamps)
