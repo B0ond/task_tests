@@ -48,14 +48,39 @@ def generate_game():
 
 game_stamps = generate_game()
 
-pprint(game_stamps)
-
 
 def get_score(game_stamps, offset):
-    '''
-        Takes list of game's stamps and time offset for which returns the scores for the home and away teams.
-        Please pay attention to that for some offsets the game_stamps list may not contain scores.
-    '''
-    # return home, away
+    left, right = 0, len(game_stamps) - 1
+
+    # Бинарный поиск для нахождения индекса первой метки с временем, большим или равным указанному времени
+    while left <= right:
+        mid = (left + right) // 2
+        if game_stamps[mid]["offset"] >= offset:
+            right = mid - 1
+        else:
+            left = mid + 1
+
+    # Если нет метки с указанным временем, вернуть счет ближайшей предыдущей метки
+    if left == len(game_stamps) or game_stamps[left]["offset"] != offset:
+        return game_stamps[left - 1]["score"]["home"], game_stamps[left - 1]["score"]["away"], 'else'
+    else:
+        return game_stamps[left]["score"]["home"], game_stamps[left]["score"]["away"], len(game_stamps) - 1
+
+
+pprint(get_score(game_stamps, 50000))
+# pprint(game_stamps)
+
+
+
+
+
+
+
+# def get_score(game_stamps, offset):
+#     '''
+#         Takes list of game's stamps and time offset for which returns the scores for the home and away teams.
+#         Please pay attention to that for some offsets the game_stamps list may not contain scores.
+#     '''
+#     # return home, away
 
 
