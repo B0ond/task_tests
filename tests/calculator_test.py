@@ -51,5 +51,6 @@ class TestCalculator(TestCase):
             calc('2++*+5')
         self.assertEqual('Выражение должн осодержать 2 целых числа и 1 знак', e.exception.args[0])
 
+
 if __name__ == '__main__':
     main()

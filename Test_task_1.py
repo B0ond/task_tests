@@ -49,22 +49,22 @@ def generate_game():
 game_stamps = generate_game()
 
 
-def get_score(game_stamps, offset):
-    left, right = 0, len(game_stamps) - 1
+def get_score(game_stamps_x, offset):
+    left, right = 0, len(game_stamps_x) - 1
 
     # Бинарный поиск для нахождения индекса первой метки с временем, большим или равным указанному времени
     while left <= right:
         mid = (left + right) // 2
-        if game_stamps[mid]["offset"] >= offset:
+        if game_stamps_x[mid]["offset"] >= offset:
             right = mid - 1
         else:
             left = mid + 1
 
     # Если нет метки с указанным временем, вернуть счет ближайшей предыдущей метки
-    if left == len(game_stamps) or game_stamps[left]["offset"] != offset:
+    if left == len(game_stamps_x) or game_stamps_x[left]["offset"] != offset:
         return 'no data'
     else:
-        return game_stamps[left]["score"]["away"], game_stamps[left]["score"]["home"], left
+        return game_stamps_x[left]["score"]["away"], game_stamps_x[left]["score"]["home"], left
 
 
 pprint(game_stamps)
