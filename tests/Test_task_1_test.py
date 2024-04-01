@@ -7,32 +7,39 @@ class TestGetScore(TestCase):
         self.game_stamps = generate_game()
 
     def test_get_score_when_offset_exists(self):
-        offset = self.game_stamps[0]['offset']  # берем первое значение метки
+        offset = self.game_stamps[0]['offset']  # берем первое значение offset
+        score = get_score(self.game_stamps, offset)
+        self.assertIsNotNone(score)
+        self.assertNotEqual(score, 'no data')
+
+    def test_get_score_middle_offset(self):
+        middle_offset = len(self.game_stamps) // 2
+        offset = self.game_stamps[middle_offset]['offset']  # берем среднее значение offset
+        score = get_score(self.game_stamps, offset)
+        self.assertIsNotNone(score)
+        self.assertNotEqual(score, 'no data')
+
+    def test_get_score_when_offset_is_last(self):
+        offset = self.game_stamps[-1]['offset']      # последний offset
+        score = get_score(self.game_stamps, offset)
+        self.assertIsNotNone(score)
+        self.assertNotEqual(score, 'no data')
+
+    def test_get_score_when_offset_is_zero(self):
+        offset = 0                                    # когда ноль
         score = get_score(self.game_stamps, offset)
         self.assertIsNotNone(score)
         self.assertNotEqual(score, 'no data')
 
     def test_get_score_when_offset_not_exists(self):
-        offset = 999999  # use an offset that does not exist in the game stamps
+        offset = 999999                               # используем несуществующий offset
         score = get_score(self.game_stamps, offset)
         self.assertEqual(score, 'no data')
-
-    def test_get_score_when_offset_is_zero(self):
-        offset = 0
-        score = get_score(self.game_stamps, offset)
-        self.assertIsNotNone(score)
-        self.assertNotEqual(score, 'no data')
 
     def test_get_score_when_offset_is_negative(self):
-        offset = -1
+        offset = -1                                   # отрицательные значения
         score = get_score(self.game_stamps, offset)
         self.assertEqual(score, 'no data')
-
-    def test_get_score_when_offset_is_last(self):
-        offset = self.game_stamps[-1]['offset']
-        score = get_score(self.game_stamps, offset)
-        self.assertIsNotNone(score)
-        self.assertNotEqual(score, 'no data')
 
 
 if __name__ == '__main__':
